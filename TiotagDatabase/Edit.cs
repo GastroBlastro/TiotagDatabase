@@ -27,6 +27,10 @@ namespace TiotagDatabase
         string fileName, custom1 = Create_New.custom1, custom2 = Create_New.custom2, custom3 = Create_New.custom3,
             custom4 = Create_New.custom4, custom5 = Create_New.custom5;
 
+        int selectedIndex = 0;
+
+        //bool sortName, sortNameUp, sortId, sortIdUp;
+
         public Edit()
         {
             InitializeComponent();
@@ -41,7 +45,6 @@ namespace TiotagDatabase
             custom4LabelLabel.Text = custom4 + ":";
             custom5LabelLabel.Text = custom5 + ":";
             nameBox.Focus();
-            nameSearchLabel.ForeColor = Color.Blue;
         }
 
         public static List<dbObject> objectDB = new List<dbObject>();
@@ -171,6 +174,8 @@ namespace TiotagDatabase
             nameListBox.Items.Clear();
             IDListBox.Items.Clear();
 
+
+
             //display items on name/ID search list
             for (int i = 0; i <= objectDB.Count() - 1; i++)
             {
@@ -181,6 +186,8 @@ namespace TiotagDatabase
             {
                 IDListBox.Items.Add(objectDB[i].id);
             }
+
+            nameListBox.SelectedIndex = IDListBox.SelectedIndex = 0;
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
@@ -237,6 +244,11 @@ namespace TiotagDatabase
                 image = "";
             }
 
+            if (nameSearchLabel.ForeColor == Color.Blue)
+            {
+                objectDB.Sort();
+            }
+            
             nameListBox.Items.Clear();
             IDListBox.Items.Clear();
 
@@ -288,6 +300,8 @@ namespace TiotagDatabase
 
             //close the writer
             writer.Close();
+
+            MessageBox.Show("Your file was successfully saved!", "Save Successful");
         }
 
         private void loadImageDialog_FileOk(object sender, CancelEventArgs e)
@@ -321,6 +335,7 @@ namespace TiotagDatabase
                 }
 
                 IDListBox.SelectedIndex = nameListBox.SelectedIndex;
+                selectedIndex = nameListBox.SelectedIndex;
             }
 
         }
@@ -348,14 +363,38 @@ namespace TiotagDatabase
 
         private void nameSearchLabel_Click(object sender, EventArgs e)
         {
-            nameSearchLabel.ForeColor = Color.Blue;
-            IdSearchLabel.ForeColor = Color.Black;
+            IdSearchLabel.ForeColor = Color.Gray;
+            nameSearchLabel.ForeColor = Color.Black;
+            nameListBox.Sorted = true;
+            IDListBox.Sorted = false;
         }
 
         private void IdSearchLabel_Click(object sender, EventArgs e)
         {
-            IdSearchLabel.ForeColor = Color.Blue;
-            nameSearchLabel.ForeColor = Color.Black;
+            IdSearchLabel.ForeColor = Color.Black;
+            nameSearchLabel.ForeColor = Color.Gray;
+            nameListBox.Sorted = false;
+            IDListBox.Sorted = true;
+
+            //sortName = false;
+            //nameSearchLabel.Text = "Name";
+            //sortId = true;
+
+            //if (IdSearchLabel.Text == "ID#")
+            //{
+            //    IdSearchLabel.Text += " ↑";
+            //    sortIdUp = true;
+            //}
+            //else if (IdSearchLabel.Text == "ID# ↑")
+            //{
+            //    IdSearchLabel.Text = "ID# ↓";
+            //    sortIdUp = false;
+            //}
+            //else if (IdSearchLabel.Text == "ID# ↓")
+            //{
+            //    IdSearchLabel.Text = "ID#";
+            //    sortId = false;
+            //}
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -388,6 +427,7 @@ namespace TiotagDatabase
             }
 
             nameBox.Text = idBox.Text = c1Box.Text = c2Box.Text = c3Box.Text = c4Box.Text = c5Box.Text = image = "";
+            nameListBox.SelectedIndex = IDListBox.SelectedIndex = selectedIndex;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -444,7 +484,9 @@ namespace TiotagDatabase
                 }
 
                 nameListBox.SelectedIndex = IDListBox.SelectedIndex;
+                selectedIndex = nameListBox.SelectedIndex;
             }
+            
 
         }
 

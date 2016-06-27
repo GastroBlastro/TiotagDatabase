@@ -114,6 +114,7 @@
             // 
             this.nameSearchLabel.AutoSize = true;
             this.nameSearchLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameSearchLabel.ForeColor = System.Drawing.SystemColors.GrayText;
             this.nameSearchLabel.Location = new System.Drawing.Point(291, 23);
             this.nameSearchLabel.Name = "nameSearchLabel";
             this.nameSearchLabel.Size = new System.Drawing.Size(48, 18);
@@ -125,6 +126,7 @@
             // 
             this.IdSearchLabel.AutoSize = true;
             this.IdSearchLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IdSearchLabel.ForeColor = System.Drawing.SystemColors.GrayText;
             this.IdSearchLabel.Location = new System.Drawing.Point(387, 23);
             this.IdSearchLabel.Name = "IdSearchLabel";
             this.IdSearchLabel.Size = new System.Drawing.Size(31, 18);
